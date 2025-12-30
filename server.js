@@ -45,7 +45,25 @@ app.get("/test-db", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// imports
+const express = require("express");
+const app = express();
+const pool = require("./db");
 
+// routes
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// server start (ALWAYS LAST)
+app.listen(PORT, () => {
+  console.log("Server running");
+});
 app.listen(PORT, () => {
   console.log("Server running");
 });
@@ -62,6 +80,7 @@ app.listen(PORT, () => {
   }
 });
 });
+
 
 
 
