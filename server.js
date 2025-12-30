@@ -37,7 +37,18 @@ const businesses = [
 app.get("/businesses", (req, res) => {
   res.json(businesses);
 });
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
+app.listen(PORT, () => {
+  console.log("Server running");
+});
 // ✅ REQUIRED FOR RENDER
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -51,5 +62,6 @@ app.listen(PORT, () => {
   }
 });
 });
+
 
 
