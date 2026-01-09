@@ -59,7 +59,9 @@ app.get("/test-db", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 // server start (ALWAYS LAST)
 app.listen(PORT, () => {
   console.log("Server running");
@@ -80,6 +82,7 @@ app.listen(PORT, () => {
   }
 });
 });
+
 
 
 
